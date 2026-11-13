@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Taller Automotriz Cordillera</title>
+   
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="#" onclick="mostrarSeccion('inicio')">🚗 Taller Cordillera</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+                <ul class="navbar-nav align-items-center" id="menuNav">
+                    <li class="nav-item" id="menuInicio"><a class="nav-link" href="#" onclick="mostrarSeccion('inicio')">Inicio</a></li>
+                    <li class="nav-item" id="menuServicios"><a class="nav-link" href="#" onclick="mostrarSeccion('servicios')">Servicios</a></li>
+                    <li class="nav-item" id="menuAcerca"><a class="nav-link" href="#" onclick="mostrarSeccion('acerca')">Acerca de</a></li>
+                    
+                    <li class="nav-item d-none" id="navSolicitar"><a class="nav-link text-info fw-bold" href="#" onclick="verificarAccesoSolicitud()">Solicitar Mantenimiento</a></li>
+                    <li class="nav-item d-none" id="navDashboard"><a class="nav-link text-warning fw-bold" href="#" onclick="irAlDashboard()">Mi Panel</a></li>
+                    
+                    <li class="nav-item" id="navLogin"><a class="nav-link btn btn-primary text-white ms-2 px-3" href="#" onclick="mostrarSeccion('login')">Iniciar Sesión</a></li>
+                    <li class="nav-item d-none" id="navLogout"><a class="nav-link btn btn-danger text-white ms-2 px-3" href="#" onclick="cerrarSesion()">Cerrar Sesión</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+
+    <main class="container my-4">
+
+        <!-- INICIO -->
+        <section id="seccion-inicio" class="row align-items-center py-5">
+            <div class="col-md-6">
+                <h1 class="display-4 fw-bold">Mantenimiento Automotriz de Confianza</h1>
+                <p class="lead text-muted">Cuidamos de tu vehículo con los más altos estándares de calidad. Solicita tu mantenimiento en línea de forma rápida y segura.</p>
+                <button class="btn btn-primary btn-lg" onclick="verificarAccesoSolicitud()">Solicitar Mantenimiento</button>
+            </div>
+            <div class="col-md-6 text-center">
+                <img src="https://images.pexels.com/photos/4489732/pexels-photo-4489732.jpeg?auto=compress&cs=tinysrgb&w=800" class="img-fluid rounded shadow" alt="Taller Automotriz">
+            </div>
+        </section>
+
+
+        <section id="seccion-servicios" class="d-none py-4">
+            <h2 class="text-center mb-4">Catálogo de Servicios</h2>
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="card h-100 shadow-sm p-3">
+                        <h5>⚙️ Mantenimiento Preventivo</h5>
+                        <p class="text-muted">Cambio de aceite, filtros y revisión general de puntos de seguridad.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card h-100 shadow-sm p-3">
+                        <h5>🔧 Frenos y Suspensión</h5>
+                        <p class="text-muted">Reemplazo de pastillas, discos y amortiguadores para una conducción segura.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card h-100 shadow-sm p-3">
+                        <h5>⚡ Diagnóstico Electrónico</h5>
+                        <p class="text-muted">Escaneo computarizado avanzado para detección y solución de fallas.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <section id="seccion-acerca" class="d-none py-4">
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <h2>Acerca de Nosotros</h2>
+                    <p class="mt-3 lead text-muted">Taller automotriz desarrollado como práctica académica del Instituto Tecnológico Cordillera para la gestión digital de solicitudes de mantenimiento vehicular.</p>
+                    <p class="text-muted">Contamos con personal altamente calificado y tecnología de punta para garantizar el óptimo funcionamiento de su automóvil.</p>
+                </div>
+                <div class="col-md-6 text-center">
+                    <img src="https://images.pexels.com/photos/3806288/pexels-photo-3806288.jpeg?auto=compress&cs=tinysrgb&w=800" class="img-fluid rounded shadow" alt="Instalaciones del Taller">
+                </div>
+            </div>
+        </section>
+
+
+        <section id="seccion-login" class="d-none py-5">
+            <div class="row justify-content-center">
+                <div class="col-md-5 card shadow p-4">
+                    <div id="bloqueLogin">
+                        <h3 class="text-center mb-3">Iniciar Sesión</h3>
+                        <form id="formLogin" onsubmit="iniciarSesion(event)">
+                            <div class="mb-3">
+                                <label class="form-label">Correo Electrónico</label>
+                                <input type="email" class="form-control" id="loginEmail" required>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Contraseña</label>
+                                <input type="password" class="form-control" id="loginPassword" required>
+                            </div>
+                            <button type="submit" class="btn btn-primary w-100">Ingresar</button>
+                        </form>
+                        <div class="text-center mt-3">
+                            <span class="text-muted small">¿No tienes cuenta?</span>
+                            <a href="#" class="small fw-bold" onclick="alternarAuth('registro')">Crear una cuenta</a>
+                        </div>
+                    </div>
+
+                    <div id="bloqueRegistro" class="d-none">
+                        <h3 class="text-center mb-3">Crear Cuenta</h3>
+                        <form id="formRegistro" onsubmit="registrarUsuario(event)">
+                            <div class="mb-3">
+                                <label class="form-label">Nombre Completo</label>
+                                <input type="text" class="form-control" id="regNombre" required>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Teléfono</label>
+                                <input type="tel" class="form-control" id="regTelefono" required>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Correo Electrónico</label>
+                                <input type="email" class="form-control" id="regEmail" required>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Contraseña</label>
+                                <input type="password" class="form-control" id="regPassword" required>
+                            </div>
+                            <button type="submit" class="btn btn-success w-100">Registrarse</button>
+                        </form>
+                        <div class="text-center mt-3">
+                            <span class="text-muted small">¿Ya tienes una cuenta?</span>
+                            <a href="#" class="small fw-bold" onclick="alternarAuth('login')">Iniciar Sesión</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <section id="seccion-cliente" class="d-none py-4">
+            <h2 id="tituloPortal">Portal de Solicitud de Mantenimiento</h2>
+            <p class="text-muted" id="saludoCliente">Bienvenido</p>
+
+            <div class="card shadow mb-4 p-4">
+                <h4>Registrar Solicitud</h4>
+                <form id="formSolicitud" onsubmit="registrarSolicitud(event)">
+                    <div class="row g-3">
+                        <div class="col-12 d-none" id="adminSelectClienteContainer">
+                            <label class="form-label fw-bold text-danger">Seleccionar Cliente (Permiso de Administrador)</label>
+                            <select class="form-select border-danger" id="adminSelectCliente" onchange="cargarVehiculoClienteSeleccionado()"></select>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label class="form-label">Placa del Vehículo (Ej: PAA-123)</label>
+                            <input type="text" class="form-control text-uppercase" id="vehiculoPlaca" maxlength="8" placeholder="PAA-123" oninput="formatearPlaca(this)" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Marca</label>
+                            <select class="form-select" id="vehiculoMarca" required>
+                                <option value="">Seleccione...</option>
+                                <option value="Chevrolet">Chevrolet</option>
+                                <option value="Toyota">Toyota</option>
+                                <option value="Hyundai">Hyundai</option>
+                                <option value="Kia">Kia</option>
+                                <option value="Nissan">Nissan</option>
+                                <option value="Ford">Ford</option>
+                                <option value="Great Wall">Great Wall</option>
+                                <option value="Chery">Chery</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Modelo</label>
+                            <select class="form-select" id="vehiculoModelo" required>
+                                <option value="">Seleccione...</option>
+                                <option value="Aveo / Sail">Aveo / Sail</option>
+                                <option value="Spark / Beat">Spark / Beat</option>
+                                <option value="Hilux / Fortuner">Hilux / Fortuner</option>
+                                <option value="Corolla / Yaris">Corolla / Yaris</option>
+                                <option value="Tucson / Santa Fe">Tucson / Santa Fe</option>
+                                <option value="Accent / Elantra">Accent / Elantra</option>
+                                <option value="Sportage / Sorento">Sportage / Sorento</option>
+                                <option value="Rio / Picanto">Rio / Picanto</option>
+                                <option value="Sentra / Versa">Sentra / Versa</option>
+                                <option value="Explorer / Escape">Explorer / Escape</option>
+                                <option value="Otro">Otro modelo</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Año</label>
+                            <input type="number" class="form-control" id="vehiculoAnio" required min="1990" max="2026">
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Kilometraje</label>
+                            <input type="number" class="form-control" id="vehiculoKm" required min="0">
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Tipo de Servicio</label>
+                            <select class="form-select" id="tipoServicio" required>
+                                <option value="">Seleccione...</option>
+                                <option value="Mantenimiento Preventivo">Mantenimiento Preventivo</option>
+                                <option value="Frenos y Suspensión">Frenos y Suspensión</option>
+                                <option value="Diagnóstico Electrónico">Diagnóstico Electrónico</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Fecha de Cita</label>
+                            <input type="date" class="form-control" id="fechaCita" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Hora de Atención disponible</label>
+                            <select class="form-select" id="horaCita" required>
+                                <option value="">Seleccione horario...</option>
+                                <option value="08:00 AM">08:00 AM</option>
+                                <option value="09:00 AM">09:00 AM</option>
+                                <option value="10:00 AM">10:00 AM</option>
+                                <option value="11:00 AM">11:00 AM</option>
+                                <option value="02:00 PM">02:00 PM</option>
+                                <option value="03:00 PM">03:00 PM</option>
+                                <option value="04:00 PM">04:00 PM</option>
+                            </select>
+                        </div>
+                        
+                        <div class="col-12">
+                            <label class="form-label d-block">Tipo de Transmisión:</label>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="transmision" id="radioManual" value="Manual" checked>
+                                <label class="form-check-label" for="radioManual">Manual</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="transmision" id="radioAuto" value="Automática">
+                                <label class="form-check-label" for="radioAuto">Automática</label>
+                            </div>
+                        </div>
+
+                        <div class="col-12">
+                            <label class="form-label d-block">Servicios adicionales requeridos:</label>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="checkbox" id="checkLavado" value="Lavado general">
+                                <label class="form-check-label" for="checkLavado">Lavado general</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="checkbox" id="checkAlineacion" value="Alineación y balanceo">
+                                <label class="form-check-label" for="checkAlineacion">Alineación y balanceo</label>
+                            </div>
+                        </div>
+
+                        <div class="col-12">
+                            <label class="form-label">Observaciones Adicionales</label>
+                            <textarea class="form-control" id="observaciones" rows="3"></textarea>
+                        </div>
+                    </div>
+                    <div class="mt-3">
+                        <button type="submit" class="btn btn-success">Guardar Solicitud</button>
+                        <button type="button" class="btn btn-secondary ms-2" onclick="irAlDashboard()">Regresar</button>
+                    </div>
+                </form>
+            </div>
+
+            <div id="contenedorMisSolicitudes">
+                <h4 class="mt-4">Mis Solicitudes Registradas</h4>
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <thead class="table-dark">
+                            <tr>
+                                <th>ID</th>
+                                <th>Placa</th>
+                                <th>Vehículo</th>
+                                <th>Servicio</th>
+                                <th>Fecha</th>
+                                <th>Estado</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tablaMisSolicitudes"></tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+
+        <section id="seccion-admin" class="d-none py-4">
+            <h2>Panel de Administrador</h2>
+            <p class="text-muted">Control general, visualización de todos los clientes, edición de turnos y cambio de estados.</p>
+            <div class="mb-3">
+                <button class="btn btn-primary" onclick="mostrarSeccion('cliente')">➕ Registrar Solicitud (Para mí u otro cliente)</button>
+            </div>
+            <div class="table-responsive">
+                <table class="table table-bordered table-striped">
+                    <thead class="table-dark">
+                        <tr>
+                            <th>ID</th>
+                            <th>Cliente</th>
+                            <th>Placa</th>
+                            <th>Servicio / Fecha / Hora</th>
+                            <th>Estado</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tablaAdminSolicitudes"></tbody>
+                </table>
+            </div>
+        </section>
+
+    </main>
+
+   
+    <footer class="bg-dark text-white text-center py-3 mt-5">
+        <p class="mb-0">Programación Web 1 - Instituto Tecnológico Cordillera © 2026</p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="js/script.js"></script>
+</body>
+</html>
